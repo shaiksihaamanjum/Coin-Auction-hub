@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Auction Hub - Rare Coins & Collectibles</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1> Coin Auction Hub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#auctions" class="nav-link">Live Auctions</a></li>
+                <li><a href="#my-items" class="nav-link">My Items</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-auth" id="navAuth">
+                <!-- Will be populated by JavaScript based on auth state -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Discover Rare Coins & Collectibles</h1>
+                <p class="hero-subtitle">Bid with virtual coins and win amazing items!</p>
+                <div class="hero-info">
+                    <div class="info-card">
+                        <span class="info-icon">🎁</span>
+                        <p>Get <strong>1000 FREE coins</strong> on signup</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-icon">🏆</span>
+                        <p>Win items and earn more coins</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-icon">💰</span>
+                        <p>Sell your items to earn coins</p>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <button class="btn btn-large btn-primary" onclick="location.href='#auctions'">Browse Auctions</button>
+                    <button class="btn btn-large btn-outline" onclick="location.href='#about'">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Auctions -->
+    <section id="auctions" class="auctions">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Live Auctions</h2>
+                <button class="btn btn-primary" onclick="openAddItemModal()" id="addItemBtn" style="display: none;">
+                    ➕ Add Your Item
+                </button>
+            </div>
+            <div class="filter-bar">
+                <select id="categoryFilter" class="filter-select">
+                    <option value="all">All Categories</option>
+                    <option value="ancient">Ancient Coins</option>
+                    <option value="modern">Modern Coins</option>
+                    <option value="commemorative">Commemorative</option>
+                    <option value="bullion">Bullion</option>
+                    <option value="other">Other Items</option>
+                </select>
+                <input type="text" id="searchInput" placeholder="Search items..." class="search-input">
+            </div>
+            <div id="auctionGrid" class="auction-grid">
+                <!-- Auction cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- My Items Section -->
+    <section id="my-items" class="my-items">
+        <div class="container">
+            <h2 class="section-title">My Winnings & Items</h2>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('winnings')">My Winnings</button>
+                <button class="tab-btn" onclick="showTab('listings')">My Listings</button>
+            </div>
+            <div id="winningsTab" class="tab-content active">
+                <div id="winningsList" class="items-list">
+                    <!-- Winnings will be displayed here -->
+                </div>
+            </div>
+            <div id="listingsTab" class="tab-content">
+                <div id="listingsList" class="items-list">
+                    <!-- User's listings will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎁</div>
+                    <h3>Get Free Coins</h3>
+                    <p>Register and receive 1000 coins instantly to start bidding!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3>Bid on Items</h3>
+                    <p>Use your coins to bid on amazing items. No real money needed!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Win & Earn</h3>
+                    <p>Win items and the seller gets your bid amount in coins</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>List Your Items</h3>
+                    <p>Add your own items and earn coins from winning bids</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Need More Coins?</h3>
+                    <p>When you run out, purchase more coins to continue bidding</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Safe & Fun</h3>
+                    <p>Practice bidding risk-free before using real money</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="contactName" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="contactEmail" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="contactMessage" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">Send Message</button>
+            </form>
+           </div>
+    </section>
+
+    <!-- Add spacing div or fix in CSS -->
+    <div style="height: 60px;"></div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="container">
+            <p>&copy; 2024 Coin Auction Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <div id="loginError" class="error-message"></div>
+                <button type="submit" class="btn btn-primary btn-large">Login</button>
+                <p class="modal-switch">Don't have an account? <a href="#" onclick="switchToRegister()">Register here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h2>Create Your Account</h2>
+            <div class="signup-bonus">
+                <span class="bonus-icon">🎁</span>
+                <p>Get <strong>1000 FREE coins</strong> on signup!</p>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" placeholder="Create a password (min 6 characters)" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirm Password</label>
+                    <input type="password" id="registerConfirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <div id="registerError" class="error-message"></div>
+                <button type="submit" class="btn btn-primary btn-large">Register & Get 1000 Coins</button>
+                <p class="modal-switch">Already have an account? <a href="#" onclick="switchToLogin()">Login here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bid Modal -->
+    <div id="bidModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBidModal()">&times;</span>
+            <h2>Place Your Bid</h2>
+            <div id="modalCoinInfo" class="modal-coin-info"></div>
+            <form id="bidForm">
+                <div class="form-group">
+                    <label for="bidAmount">Your Bid Amount (Coins)</label>
+                    <input type="number" id="bidAmount" min="0" step="1" required>
+                    <p class="bid-help-text">Minimum bid: <span id="minBid">0</span> coins</p>
+                    <p class="bid-help-text">Your balance: <span id="userBalance">0</span> coins</p>
+                </div>
+                <div id="bidError" class="error-message"></div>
+                <button type="submit" class="btn btn-primary btn-large">Place Bid</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Item Modal -->
+    <div id="addItemModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddItemModal()">&times;</span>
+            <h2>List Your Item</h2>
+            <form id="addItemForm">
+                <div class="form-group">
+                    <label for="itemTitle">Item Title</label>
+                    <input type="text" id="itemTitle" placeholder="Enter item title" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemDescription">Description</label>
+                    <textarea id="itemDescription" rows="3" placeholder="Describe your item" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="itemCategory">Category</label>
+                    <select id="itemCategory" required>
+                        <option value="ancient">Ancient Coins</option>
+                        <option value="modern">Modern Coins</option>
+                        <option value="commemorative">Commemorative</option>
+                        <option value="bullion">Bullion</option>
+                        <option value="other">Other Items</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="itemStartingBid">Starting Bid (Coins)</label>
+                    <input type="number" id="itemStartingBid" min="1" placeholder="Minimum 1 coin" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemDuration">Auction Duration</label>
+                    <select id="itemDuration" required>
+                        <option value="1">1 Hour</option>
+                        <option value="6">6 Hours</option>
+                        <option value="12">12 Hours</option>
+                        <option value="24">24 Hours</option>
+                        <option value="48">48 Hours</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="itemImage">Image URL (optional)</label>
+                    <input type="url" id="itemImage" placeholder="https://example.com/image.jpg">
+                </div>
+                <div id="addItemError" class="error-message"></div>
+                <button type="submit" class="btn btn-primary btn-large">List Item</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Buy Coins Modal -->
+    <div id="buyCoinsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBuyCoinsModal()">&times;</span>
+            <h2>Purchase Coins</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Choose a coin package:</p>
+            <div class="coin-packages">
+                <div class="coin-package" onclick="selectCoinPackage(500, 5)">
+                    <div class="package-coins">500 Coins</div>
+                    <div class="package-price">$5.00</div>
+                </div>
+                <div class="coin-package featured" onclick="selectCoinPackage(1200, 10)">
+                    <div class="package-badge">Best Value</div>
+                    <div class="package-coins">1200 Coins</div>
+                    <div class="package-price">$10.00</div>
+                </div>
+                <div class="coin-package" onclick="selectCoinPackage(2500, 20)">
+                    <div class="package-coins">2500 Coins</div>
+                    <div class="package-price">$20.00</div>
+                </div>
+                <div class="coin-package" onclick="selectCoinPackage(5500, 40)">
+                    <div class="package-coins">5500 Coins</div>
+                    <div class="package-price">$40.00</div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 1rem; color: #6b7280; font-size: 0.9rem;">
+                Payment processing would be integrated here in production
+            </p>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
